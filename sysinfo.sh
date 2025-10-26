@@ -19,7 +19,8 @@ foreign_packages=$(pacman -Qm | wc -l)
 native_packages=$(pacman -Qn | wc -l)
 
 echo "$(date +"%F")"
-echo "System uptime: $(uptime | awk '{print $1}')"
+echo "System uptime: $(uptime -p)"
+echo "$(df / -h | awk '{print $2, $3, $5}')"
 echo "Hello $user you have $package_amount of packages installed in total"
 echo "Out of $package_amount, $native_packages are official  and $foreign_packages are foreign (from the AUR or built from source)"
 
