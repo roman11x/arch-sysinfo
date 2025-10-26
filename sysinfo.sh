@@ -21,6 +21,8 @@ native_packages=$(pacman -Qn | wc -l)
 echo "$(date +"%F")"
 echo "System uptime: $(uptime -p)"
 echo "$(df / -h | awk '{print $2, $3, $5}')"
+echo "$(free -h | grep "Mem:" | awk '{print "Total Ram: " $2, "Used: " $3, "Available: " $7}')"
+echo "$(free -h | grep "Swap:" | awk '{print "Total Swap: " $2, "Used: " $3, "Available: " $4}')"
 echo "Hello $user you have $package_amount of packages installed in total"
 echo "Out of $package_amount, $native_packages are official  and $foreign_packages are foreign (from the AUR or built from source)"
 
