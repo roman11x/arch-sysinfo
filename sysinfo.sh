@@ -9,5 +9,11 @@ echo "Arch System Info Tool v.01"
 echo "========================="
 echo ""
 echo "Todo: System stats and package management"
+echo ""
 
+package_amount=$(pacman -Qq | wc -l)
+user=$(whoami)
+
+echo "$(date +"%F")"
+echo "Hello $user you have $package_amount of packages installed via pacman"
 
