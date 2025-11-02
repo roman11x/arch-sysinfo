@@ -5,10 +5,9 @@
 #Date: 26th of October, 2025
 #Description: Displays system information and manages packages for Arch/Arch based systems
 
-echo "Arch System Info Tool v.01"
+echo "Arch System Info Tool v.1.0"
 echo "========================="
 echo ""
-echo "Todo: System stats and package management"
 echo ""
 
 #allow the user to know how many packages they have in their system in total
@@ -28,7 +27,7 @@ echo "Out of $package_amount, $native_packages are official  and $foreign_packag
 echo
 echo "Your most recent AUR package upgrades are:"
 grep "upgraded" /var/log/pacman.log | grep -f <(pacman -Qmq) | tail -n 10 | awk '{print $1, $4}'
-
+echo ""
 
 #use the aur helper installed on the user's system for package managment
 AUR_helper=""
@@ -40,7 +39,25 @@ else
 	AUR_helper="pacman"
 fi
 echo "Your aur helper is $AUR_helper"
+echo ""
 
+read -p "please enter the name of the package you would like to remove " package_name
+
+echo ""
+
+if pacman -Q "$package_name" &> /dev/null 
+then
+	#package exists - confirm with the user
+	read -p "Are you sure you would like to remove $package_name? y/n " confirm
+	if [ "$confirm" = "y" ]
+	then
+		sudo $AUR_helper -Rns "$package_name"
+	else
+		echo "Removal canclled"
+	fi
+else
+	echo "Error: package $package_name is not installed on your system"
+fi
 
 
 
