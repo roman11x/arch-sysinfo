@@ -25,5 +25,9 @@ echo "$(free -h | grep "Mem:" | awk '{print "Total Ram: " $2, "Used: " $3, "Avai
 echo "$(free -h | grep "Swap:" | awk '{print "Total Swap: " $2, "Used: " $3, "Available: " $4}')"
 echo "Hello $user you have $package_amount of packages installed in total"
 echo "Out of $package_amount, $native_packages are official  and $foreign_packages are foreign (from the AUR or built from source)"
+echo
+echo "Your most recent AUR package upgrades are:"
+grep "upgraded" /var/log/pacman.log | grep -f <(pacman -Qmq) | tail -n 10 | awk '{print $1, $4}'
+
 
 
