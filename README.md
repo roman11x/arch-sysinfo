@@ -1,4 +1,4 @@
-# Arch Sytem Info TOol
+# Arch Sytem Info Tool
 A bash-based system information and package management tool for Arch Linux and Arch based systems
 
 ![Screenshot](screenshot.png)
