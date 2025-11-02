@@ -30,4 +30,19 @@ echo "Your most recent AUR package upgrades are:"
 grep "upgraded" /var/log/pacman.log | grep -f <(pacman -Qmq) | tail -n 10 | awk '{print $1, $4}'
 
 
+#use the aur helper installed on the user's system for package managment
+AUR_helper=""
+if [ -f $(which paru) ]
+then
+	AUR_helper="paru"
+elif [ -f $(which yay) ]
+then
+	AUR_helper="yay"
+else
+	AUR_helper="pacman"
+fi
+echo 
+echo "Your AUR helper is $AUR_helper"
+
+
 
